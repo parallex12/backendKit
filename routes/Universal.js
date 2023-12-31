@@ -5,22 +5,21 @@ import { ensureToken } from "../services/Secure.js";
 const router = express.Router();
 
 //create data
-router.post("/", ensureToken, createDoc);
+router.post("/",  createDoc);
 
 //create with custom id data
-router.post("/:id", ensureToken, createDoc);
+router.post("/:id", createDoc);
 
 //Get data
-router.get("/:id", ensureToken, getDocById);
+router.get("/:id", getDocById);
 
 //Get all where key==value data
-router.get("/:key/:value", ensureToken, getAllDocsByKey);
+router.get("/:key/:value",  getAllDocsByKey);
 
 //Update data
-router.put("/:id", ensureToken, updateDocById);
+router.put("/:id",  updateDocById);
 
 //Delete data
 router.delete("/:id",  deleteDoc);
-
-
+ 
 export default router;

@@ -2,7 +2,7 @@ import express from "express";
 import { loadRoutes } from "./services/index.js";
 import { v1Routes } from "./v1RoutesPath/index.js";
 import firebase from "./services/Firebase.js";
-import { setHeaders } from "./middlewares.js";
+import { setHeaders } from "./middlerwares.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

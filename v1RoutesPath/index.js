@@ -6,3 +6,4 @@ export const v1Routes = [
   { path: "/users", file: Users },
   { path: "/uni_v2/:id", file: Universal },
 ];
+ 
