@@ -13,17 +13,17 @@ export const createDoc = async (req, res) => {
     let config = data?.config;
 
     delete data["config"]
-    const queryData = await Query?.query_create(path[2], id?.toString(), data);
+    const queryData = await Query?.query_create(path[1], id?.toString(), data);
     if (config) {
       let queryResult;
       // Check if "return" key exists and has a valid value
       if (config.return && ['table', 'current'].includes(config.return)) {
         switch (config.return) {
           case 'table':
-            queryResult = await Query?.query_Get_all(path[2]);
+            queryResult = await Query?.query_Get_all(path[1]);
             break;
           case 'current':
-            queryResult = await Query?.query_Get_by_id(path[2], id?.toString());
+            queryResult = await Query?.query_Get_by_id(path[1], id?.toString());
             break;
           default:
             console.warn('Unexpected "return" value:', config.return);
@@ -48,9 +48,10 @@ export const getDocById = async (req, res) => {
   try {
     let path = req.originalUrl?.replace("/", "").split("/");
     let id = req.params.id;
-    const queryData = await Query?.query_Get_by_id(path[2], id);
-    if (queryData.exists()) {
-      let _tempData = { ...queryData?.data(), id: id }
+    const queryData = await Query?.query_Get_by_id(path[1], id);
+    console.log(queryData)
+    if (queryData) {
+      let _tempData = { ...queryData, id: id }
       res.send({ msg: "data Found", code: "200", data: _tempData });
     } else {
       console.log(id)
@@ -69,7 +70,7 @@ export const getAllDocsByKey = async (req, res) => {
     let path = req.originalUrl?.replace("/", "").split("/");
     let key = req.params.key;
     let value = req.params.value;
-    const queryData = await Query?.query_Get_by_key(path[2], key, value);
+    const queryData = await Query?.query_Get_by_key(path[1], key, value);
     res.send(queryData)
     res.end();
   } catch (e) {
@@ -86,17 +87,17 @@ export const updateDocById = async (req, res) => {
     let data = req.body;
     let config = data?.config;
     delete data["config"]
-    const queryData = await Query?.query_update(path[2], id, data);
+    const queryData = await Query?.query_update(path[1], id, data);
     if (config) {
       let queryResult;
       // Check if "return" key exists and has a valid value
       if (config.return && ['table', 'current'].includes(config.return)) {
         switch (config.return) {
           case 'table':
-            queryResult = await Query?.query_Get_all(path[2]);
+            queryResult = await Query?.query_Get_all(path[1]);
             break;
           case 'current':
-            queryResult = await Query?.query_Get_by_id(path[2], id);
+            queryResult = await Query?.query_Get_by_id(path[1], id);
             break;
           default:
             console.warn('Unexpected "return" value:', config.return);
@@ -122,7 +123,7 @@ export const deleteDoc = async (req, res) => {
     let path = req.originalUrl?.replace("/", "").split("/");
     let id = req.params.id;
     let config = req?.body?.config;
-    const queryData = await Query?.query_delete(path[2], id);
+    const queryData = await Query?.query_delete(path[1], id);
     console.log(queryData)
     if (config) {
       let queryResult;
@@ -130,7 +131,7 @@ export const deleteDoc = async (req, res) => {
       if (config.return) {
         switch (config.return) {
           case 'table':
-            queryResult = await Query?.query_Get_all(path[2]);
+            queryResult = await Query?.query_Get_all(path[1]);
             break;
           default:
             queryResult = `Unexpected "return" value: ${config.return}`

@@ -6,7 +6,7 @@ export const getDocById = async (req, res) => {
     let path = req.originalUrl?.replace("/", "").split("/");
     let id = _tokenDetails(req.token)?.user_id;
     const queryData = await Query?.query_Get_by_id("users", id);
-    if (queryData.exists()) {
+    if (queryData?.data()) {
       let _tempData = { ...queryData?.data(), id: id }
       res.send(_tempData);
     } else {
