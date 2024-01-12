@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/", ensureToken, getDocById);
 
 //update user by id
-router.post("/", ensureToken, updateDocById);
+router.put("/", ensureToken, updateDocById);
 
 
 export default router;

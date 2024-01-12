@@ -1,13 +1,12 @@
 export const githubToken = "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";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDZKF4wmnAKKJStHyPN46xJI4C7XgoYuJM",
-  authDomain: "riderbro-6ff80.firebaseapp.com",
-  projectId: "riderbro-6ff80",
-  storageBucket: "riderbro-6ff80.appspot.com",
-  messagingSenderId: "821099403122",
-  appId: "1:821099403122:web:f4d27e6c437221aa88afeb",
-  measurementId: "G-NZPDSN664C"
+  apiKey: "AIzaSyCZfRUtk_8P_N8F0ZrssZTM03ibLPh8XK8",
+  authDomain: "kippers-84ad2.firebaseapp.com",
+  projectId: "kippers-84ad2",
+  storageBucket: "kippers-84ad2.appspot.com",
+  messagingSenderId: "160019502923",
+  appId: "1:160019502923:web:2f443e2e51f07454fcface",
 };
 
 

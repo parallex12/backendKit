@@ -17,7 +17,7 @@ export const createDoc = async (req, res) => {
     if (config) {
       let queryResult;
       // Check if "return" key exists and has a valid value
-      if (config.return && ['table', 'current'].includes(config.return)) {
+      if (config.return && ['table', 'current',"byKey"].includes(config.return)) {
         switch (config.return) {
           case 'table':
             queryResult = await Query?.query_Get_all(path[1]);
@@ -25,7 +25,11 @@ export const createDoc = async (req, res) => {
           case 'current':
             queryResult = await Query?.query_Get_by_id(path[1], id?.toString());
             break;
+          case 'byKey':
+            queryResult = await Query?.query_Get_by_key(path[1], config?.params?.key, config?.params?.value);
+            break;
           default:
+            queryResult = 'Unexpected "return" value:', config.return
             console.warn('Unexpected "return" value:', config.return);
             break;
         }
@@ -52,10 +56,10 @@ export const getDocById = async (req, res) => {
     console.log(queryData)
     if (queryData) {
       let _tempData = { ...queryData, id: id }
-      res.send({ msg: "data Found", code: "200", data: _tempData });
+      res.send(_tempData);
     } else {
       console.log(id)
-      res.send({ msg: "No data Found", code: "404", data: [] });
+      res.send([]);
     }
     res.end();
   } catch (e) {
